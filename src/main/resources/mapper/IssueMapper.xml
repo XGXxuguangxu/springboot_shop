@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shop.user.mapper.IssueMapper">
+    <resultMap id="IssueMap" type="com.shop.user.modal.Issue">
+        <!-- private Integer id;       //自增ID
+    private Merchant merchant = new Merchant();  //关联用商家表
+    private Secondlevel secondlevel = new Secondlevel();//二级技能类型外键id
+    private String describe;  //详情描述
+    private String headline;  //标题
+    private Double price;     //价格
+    private Integer number;   //人数
+    private String address;   //地址（区域）
+    private Integer state;    //发布审核状态（审核中。。。）
+    private Integer forcedState;//强制状态（违规可强制下架1.是2.否）
+    private Double money;     //定金（从客户余额扣除）
+    private Integer bxid;     //关联保险表外键   无表！
+    private String payment;   //支付方式
+    private Double paymentAmount; //支付金额
+    private String releaseTime;   //发布时间
+    private String picture;       //图片
+    private Integer istate;//发布任务的状态(1.接取2.未接取)/新增
+    private String iphone;//手机号(登录的手机号)/新增
+    private Integer stock;//任务数量/新增
+-->
+        <id property="id" column="id"></id>
+        <result property="describe" column="describe"></result>
+        <result property="headline" column="headline"></result>
+        <result property="price" column="price"></result>
+        <result property="number" column="number"></result>
+        <result property="address" column="address"></result>
+        <result property="state" column="state"></result>
+        <result property="forcedState" column="forcedState"></result>
+        <result property="money" column="money"></result>
+        <result property="payment" column="payment"></result>
+        <result property="paymentAmount" column="paymentAmount"></result>
+        <result property="releaseTime" column="releaseTime"></result>
+        <result property="picture" column="picture"></result>
+        <result property="istate" column="istate"></result>
+        <result property="iphone" column="iphone"></result>
+        <result property="stock" column="stock"></result>
+        <association property="merchant" javaType="com.shop.user.modal.Merchant">
+            <!-- private Integer id;                 //自增ID
+             private String phone;               //手机号
+             private String password;            //密码
+             private String enterpriseName;      //企业名称
+             private String nickName;            //呢称
+             private Integer position;           //在企业职位（单表或者数字状态都可以）
+             private String name;                //真实姓名
+             private String contact;             //真实联系方式，生成虚拟号或后期进行转接
+             private Identity identity= new Identity();//关联身份表
+             private Integer head;               //头像（头像是否是本人头像）1.是2.否
+             private Integer headState;          //头像审核状态（0,1,2）
+             private String location;            //公司位置
+             private Integer personIntegral;     //关联积分表  无表！
+             private Integer personCurrency;     //关联虚拟币表  无表！
+             private Integer starLevel;          //企业星级
+             private String area;                //企业派单区域
+             private String nature;              //企业性质
+             private String particular;          //企业用工详细需求类型
+             private Integer member;             //会员状态(1.正常2.异常)
+             private Otherskills otherskills = new Otherskills();//关联其他认证方式表
+             private Integer ranking;            //企业排名
+             private Integer status;             //企业状态（是否违规操作，违规操作该企业纳入企业黑名单1.是2.否）
+             private String credit;              //征信记录（通过富文本方式记录,不对外人进行展示)
+             private Double balance;             //企业余额-->
+            <result column="id" property="id"></result>
+            <result column="phone" property="phone"></result>
+            <result column="password" property="password"></result>
+            <result column="enterpriseName" property="enterpriseName"></result>
+            <result column="nickName" property="nickName"></result>
+            <result column="position" property="position"></result>
+            <result column="name" property="name"></result>
+            <result column="contact" property="contact"></result>
+            <!-- <result column="identity" property="identity"></result>-->
+            <result column="head" property="head"></result>
+            <result column="headState" property="headState"></result>
+            <result column="location" property="location"></result>
+            <result column="personIntegral" property="personIntegral"></result>
+            <result column="personCurrency" property="personCurrency"></result>
+            <result column="starLevel" property="starLevel"></result>
+            <result column="area" property="area"></result>
+            <result column="nature" property="nature"></result>
+            <result column="particular" property="particular"></result>
+            <result column="member" property="member"></result>
+            <!--  <result column="otherskills" property="otherskills"></result>-->
+            <result column="ranking" property="ranking"></result>
+            <result column="status" property="status"></result>
+            <result column="credit" property="credit"></result>
+            <result column="balance" property="balance"></result>
+        </association>
+        <association property="secondlevel" javaType="com.shop.user.modal.Secondlevel">
+            <!--private Integer id;       //自增ID
+            private String names;     //技能名称
+            private Integer rankings; //技能类别（内部排名）
+            private Integer states;   //技能状态（1.显示，2.不显示）
+            private Stairlevel stairlevel = new Stairlevel();//关联一级类型
+            private Double advance;  //预付款-->
+            <result column="id" property="id"></result>
+            <result column="names" property="names"></result>
+            <result column="rankings" property="rankings"></result>
+            <result column="states" property="states"></result>
+            <!-- <result column="stairlevel" property="stairlevel"></result>-->
+            <result column="advance" property="advance"></result>
+        </association>
+        <!--保单未定暂无映射-->
+    </resultMap>
+
+    <select id="getIssueList" resultMap="IssueMap" parameterType="map">
+        SELECT i.*,m.`enterpriseName`,s.`names`
+        FROM issue i,merchant m,secondlevel s
+        WHERE i.`mid`=m.`id`
+        AND i.sid=s.`id`
+        ORDER BY i.`id`
+        limit ${start},${size}
+    </select>
+
+    <select id="findIssueCount" resultType="int" parameterType="map">
+        SELECT count(1)
+        FROM issue i,merchant m,secondlevel s
+        WHERE i.`mid`=m.`id`
+        AND i.sid=s.`id`
+    </select>
+
+    <insert id="addIssue" parameterType="com.shop.user.modal.Issue">
+     INSERT  INTO `issue` VALUES
+     (NULL,
+     #{merchant.id},
+     #{secondlevel.id},
+     #{describe},
+     #{headline},
+     #{price},
+     #{number},
+     #{address},
+     #{state},
+     #{forcedState},
+     #{money},
+     #{bxid},
+     #{payment},
+     #{paymentAmount},
+     NOW(),
+     #{picture},
+     #{istate},
+     #{iphone},
+     DEFAULT)
+    </insert>
+
+    <select id="getIssue" resultMap="IssueMap" parameterType="String">
+        SELECT i.id,m.nickName,s.names,
+        i.describe,i.headline,i.price,
+        i.number,i.address,
+        i.state,i.forcedState,
+        i.money,i.payment,
+        i.paymentAmount,
+        i.releaseTime,
+        i.iphone,i.istate,
+        i.picture
+        FROM issue i,merchant m,secondlevel s
+        WHERE i.mid=m.id
+        AND i.sid=s.id
+        AND iphone=#{phone}
+     </select>
+
+    <update id="updateIssue" parameterType="com.shop.user.modal.Issue">
+          UPDATE `issue` SET
+          `mid`=#{merchant.id},
+          sid=#{secondlevel.id},
+          `describe`=#{describe},
+          headline=#{headline},
+          price=#{price},
+          `number`=#{number},
+          address=#{address},
+          state=#{state},
+          forcedState=#{forcedState},
+          money=#{money},
+          payment=#{payment},
+          paymentAmount=#{paymentAmount},
+          releaseTime=NOW(),
+          picture=#{picture},
+          istate=#{istate},
+          iphone=#{iphone},
+          stock=#{stock}
+          where id =#{id}
+    </update>
+
+    <delete id="deleteIssue" parameterType="int">
+     DELETE FROM `issue` WHERE id=#{id}
+    </delete>
+
+</mapper>  

@@ -1,0 +1,31 @@
+server: 
+  port: 9009
+spring: 
+  application:  
+    name: shop_user #指定服务名
+  datasource:  
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.2.161:3306/lendhead?characterEncoding=UTF8
+    username: root
+    password: ok
+    #配置redis
+  redis:
+    host: 127.0.0.1
+    password: 123456
+  #格式化日期
+  jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+#配置mybaties支持
+mybatis:
+  mapper-locations:
+    - classpath:dao/*.xml   #扫描resource目录下的.xml
+    - classpath*:com/**/mapper/*.xml   #扫描类路径下的xml
+    - classpath:mapper/*.xml
+#阿里云短信配置
+aliyun:
+   sms:
+     accessKeyId: LTAI4Ftpwo8s5fqb2sjfmmtC
+     accessKeySecret: 4WgcAUuC1gSmBUwwPImim3NgbmxpH6
+     template_code: SMS_177538744
+     sign_name: 搭把手

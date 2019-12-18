@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shop.user.mapper.MerchantMapper">
+    <resultMap id="BaseResultMap" type="com.shop.user.modal.Merchant">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="enterpriseName" jdbcType="VARCHAR" property="enterpriseName" />
+        <result column="nickName" jdbcType="VARCHAR" property="nickName" />
+        <result column="position" jdbcType="INTEGER" property="position" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="contact" jdbcType="VARCHAR" property="contact" />
+        <result column="iid" jdbcType="INTEGER" property="iid" />
+        <result column="head" jdbcType="INTEGER" property="head" />
+        <result column="headState" jdbcType="INTEGER" property="headState" />
+        <result column="location" jdbcType="VARCHAR" property="location" />
+        <result column="personIntegral" jdbcType="INTEGER" property="personIntegral" />
+        <result column="personCurrency" jdbcType="INTEGER" property="personCurrency" />
+        <result column="starLevel" jdbcType="INTEGER" property="starLevel" />
+        <result column="area" jdbcType="VARCHAR" property="area" />
+        <result column="nature" jdbcType="VARCHAR" property="nature" />
+        <result column="particular" jdbcType="VARCHAR" property="particular" />
+        <result column="member" jdbcType="INTEGER" property="member" />
+        <result column="oid" jdbcType="INTEGER" property="oid" />
+        <result column="ranking" jdbcType="INTEGER" property="ranking" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="credit" jdbcType="VARCHAR" property="credit" />
+        <result column="balance" jdbcType="DOUBLE" property="balance" />
+        <result column="identitys" jdbcType="VARCHAR" property="identitys" />
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, phone, password, enterpriseName, nickName, `position`, `name`, contact, iid, head,
+    headState, location, personIntegral, personCurrency, starLevel, area, nature, particular,
+    member, oid, ranking, status, credit, balance, identitys
+  </sql>
+    <select id="selectByExample" parameterType="com.shop.user.modal.MerchantExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from merchant
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from merchant
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from merchant
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.shop.user.modal.MerchantExample">
+        delete from merchant
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.shop.user.modal.Merchant">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into merchant (phone, password, enterpriseName,
+        nickName, `position`, `name`, contact, iid, head,
+        headState, location, personIntegral, personCurrency,
+        starLevel, area, nature, particular,
+        member, oid, ranking, status, credit, balance, identitys
+        )
+        values (#{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR},
+        #{nickName,jdbcType=VARCHAR}, #{position,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+        #{contact,jdbcType=VARCHAR}, #{iid,jdbcType=INTEGER}, #{head,jdbcType=INTEGER},
+        #{headState,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, #{personIntegral,jdbcType=INTEGER},
+        #{personCurrency,jdbcType=INTEGER}, #{starLevel,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR},
+        #{nature,jdbcType=VARCHAR}, #{particular,jdbcType=VARCHAR}, #{member,jdbcType=INTEGER},
+        #{oid,jdbcType=INTEGER}, #{ranking,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+        #{credit,jdbcType=VARCHAR}, #{balance,jdbcType=DOUBLE}, #{identitys,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.shop.user.modal.Merchant">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into `merchant`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="enterpriseName != null">
+                enterpriseName,
+            </if>
+            <if test="nickName != null">
+                nickName,
+            </if>
+            <if test="position != null">
+                `position`,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="contact != null">
+                contact,
+            </if>
+            <if test="iid != null">
+                iid,
+            </if>
+            <if test="head != null">
+                head,
+            </if>
+            <if test="headState != null">
+                headState,
+            </if>
+            <if test="location != null">
+                location,
+            </if>
+            <if test="personIntegral != null">
+                personIntegral,
+            </if>
+            <if test="personCurrency != null">
+                personCurrency,
+            </if>
+            <if test="starLevel != null">
+                starLevel,
+            </if>
+            <if test="area != null">
+                area,
+            </if>
+            <if test="nature != null">
+                nature,
+            </if>
+            <if test="particular != null">
+                particular,
+            </if>
+            <if test="member != null">
+                member,
+            </if>
+            <if test="oid != null">
+                oid,
+            </if>
+            <if test="ranking != null">
+                ranking,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="credit != null">
+                credit,
+            </if>
+            <if test="balance != null">
+                balance,
+            </if>
+            <if test="identitys != null">
+                identitys,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="enterpriseName != null">
+                #{enterpriseName,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                #{position,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="contact != null">
+                #{contact,jdbcType=VARCHAR},
+            </if>
+            <if test="iid != null">
+                #{iid,jdbcType=INTEGER},
+            </if>
+            <if test="head != null">
+                #{head,jdbcType=INTEGER},
+            </if>
+            <if test="headState != null">
+                #{headState,jdbcType=INTEGER},
+            </if>
+            <if test="location != null">
+                #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="personIntegral != null">
+                #{personIntegral,jdbcType=INTEGER},
+            </if>
+            <if test="personCurrency != null">
+                #{personCurrency,jdbcType=INTEGER},
+            </if>
+            <if test="starLevel != null">
+                #{starLevel,jdbcType=INTEGER},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="nature != null">
+                #{nature,jdbcType=VARCHAR},
+            </if>
+            <if test="particular != null">
+                #{particular,jdbcType=VARCHAR},
+            </if>
+            <if test="member != null">
+                #{member,jdbcType=INTEGER},
+            </if>
+            <if test="oid != null">
+                #{oid,jdbcType=INTEGER},
+            </if>
+            <if test="ranking != null">
+                #{ranking,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="credit != null">
+                #{credit,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                #{balance,jdbcType=DOUBLE},
+            </if>
+            <if test="identitys != null">
+                #{identitys,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.shop.user.modal.MerchantExample" resultType="java.lang.Integer">
+        select count(*) from `merchant`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update `merchant`
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.phone != null">
+                phone = #{record.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null">
+                password = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.enterpriseName != null">
+                enterpriseName = #{record.enterpriseName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nickName != null">
+                nickName = #{record.nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.position != null">
+                `position` = #{record.position,jdbcType=INTEGER},
+            </if>
+            <if test="record.name != null">
+                `name` = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contact != null">
+                contact = #{record.contact,jdbcType=VARCHAR},
+            </if>
+            <if test="record.iid != null">
+                iid = #{record.iid,jdbcType=INTEGER},
+            </if>
+            <if test="record.head != null">
+                head = #{record.head,jdbcType=INTEGER},
+            </if>
+            <if test="record.headState != null">
+                headState = #{record.headState,jdbcType=INTEGER},
+            </if>
+            <if test="record.location != null">
+                location = #{record.location,jdbcType=VARCHAR},
+            </if>
+            <if test="record.personIntegral != null">
+                personIntegral = #{record.personIntegral,jdbcType=INTEGER},
+            </if>
+            <if test="record.personCurrency != null">
+                personCurrency = #{record.personCurrency,jdbcType=INTEGER},
+            </if>
+            <if test="record.starLevel != null">
+                starLevel = #{record.starLevel,jdbcType=INTEGER},
+            </if>
+            <if test="record.area != null">
+                area = #{record.area,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nature != null">
+                nature = #{record.nature,jdbcType=VARCHAR},
+            </if>
+            <if test="record.particular != null">
+                particular = #{record.particular,jdbcType=VARCHAR},
+            </if>
+            <if test="record.member != null">
+                member = #{record.member,jdbcType=INTEGER},
+            </if>
+            <if test="record.oid != null">
+                oid = #{record.oid,jdbcType=INTEGER},
+            </if>
+            <if test="record.ranking != null">
+                ranking = #{record.ranking,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.credit != null">
+                credit = #{record.credit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.balance != null">
+                balance = #{record.balance,jdbcType=DOUBLE},
+            </if>
+            <if test="record.identitys != null">
+                identitys = #{record.identitys,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update `merchant`
+        set id = #{record.id,jdbcType=INTEGER},
+        phone = #{record.phone,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=VARCHAR},
+        enterpriseName = #{record.enterpriseName,jdbcType=VARCHAR},
+        nickName = #{record.nickName,jdbcType=VARCHAR},
+        `position` = #{record.position,jdbcType=INTEGER},
+        `name` = #{record.name,jdbcType=VARCHAR},
+        contact = #{record.contact,jdbcType=VARCHAR},
+        iid = #{record.iid,jdbcType=INTEGER},
+        head = #{record.head,jdbcType=INTEGER},
+        headState = #{record.headState,jdbcType=INTEGER},
+        location = #{record.location,jdbcType=VARCHAR},
+        personIntegral = #{record.personIntegral,jdbcType=INTEGER},
+        personCurrency = #{record.personCurrency,jdbcType=INTEGER},
+        starLevel = #{record.starLevel,jdbcType=INTEGER},
+        area = #{record.area,jdbcType=VARCHAR},
+        nature = #{record.nature,jdbcType=VARCHAR},
+        particular = #{record.particular,jdbcType=VARCHAR},
+        member = #{record.member,jdbcType=INTEGER},
+        oid = #{record.oid,jdbcType=INTEGER},
+        ranking = #{record.ranking,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=INTEGER},
+        credit = #{record.credit,jdbcType=VARCHAR},
+        balance = #{record.balance,jdbcType=DOUBLE},
+        identitys = #{record.identitys,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.shop.user.modal.Merchant">
+        update `merchant`
+        <set>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="enterpriseName != null">
+                enterpriseName = #{enterpriseName,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                nickName = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                `position` = #{position,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="contact != null">
+                contact = #{contact,jdbcType=VARCHAR},
+            </if>
+            <if test="iid != null">
+                iid = #{iid,jdbcType=INTEGER},
+            </if>
+            <if test="head != null">
+                head = #{head,jdbcType=INTEGER},
+            </if>
+            <if test="headState != null">
+                headState = #{headState,jdbcType=INTEGER},
+            </if>
+            <if test="location != null">
+                location = #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="personIntegral != null">
+                personIntegral = #{personIntegral,jdbcType=INTEGER},
+            </if>
+            <if test="personCurrency != null">
+                personCurrency = #{personCurrency,jdbcType=INTEGER},
+            </if>
+            <if test="starLevel != null">
+                starLevel = #{starLevel,jdbcType=INTEGER},
+            </if>
+            <if test="area != null">
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="nature != null">
+                nature = #{nature,jdbcType=VARCHAR},
+            </if>
+            <if test="particular != null">
+                particular = #{particular,jdbcType=VARCHAR},
+            </if>
+            <if test="member != null">
+                member = #{member,jdbcType=INTEGER},
+            </if>
+            <if test="oid != null">
+                oid = #{oid,jdbcType=INTEGER},
+            </if>
+            <if test="ranking != null">
+                ranking = #{ranking,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="credit != null">
+                credit = #{credit,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                balance = #{balance,jdbcType=DOUBLE},
+            </if>
+            <if test="identitys != null">
+                identitys = #{identitys,jdbcType=VARCHAR},
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.shop.user.modal.Merchant">
+    update `merchant`
+    set phone = #{phone,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      enterpriseName = #{enterpriseName,jdbcType=VARCHAR},
+      nickName = #{nickName,jdbcType=VARCHAR},
+      `position` = #{position,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      iid = #{iid,jdbcType=INTEGER},
+      head = #{head,jdbcType=INTEGER},
+      headState = #{headState,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR},
+      personIntegral = #{personIntegral,jdbcType=INTEGER},
+      personCurrency = #{personCurrency,jdbcType=INTEGER},
+      starLevel = #{starLevel,jdbcType=INTEGER},
+      area = #{area,jdbcType=VARCHAR},
+      nature = #{nature,jdbcType=VARCHAR},
+      particular = #{particular,jdbcType=VARCHAR},
+      member = #{member,jdbcType=INTEGER},
+      oid = #{oid,jdbcType=INTEGER},
+      ranking = #{ranking,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      credit = #{credit,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=DOUBLE},
+      identitys = #{identitys,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>  

@@ -22,4 +22,14 @@ public interface MerchantsMapper {
      *@创建时间  2019/12/18
      */
     public List<Merchant> findMerchantAll();
+
+
+    /**
+     *@描述  （商家信息修改）
+     *@参数
+     *@返回值
+     *@创建人  wanghe
+     *@创建时间  2019/12/19
+     */
+    public Integer updateMerchant(Merchant merchant);
 }

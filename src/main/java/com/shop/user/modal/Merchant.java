@@ -15,8 +15,8 @@ public class Merchant implements Serializable {
     private Integer position;           //在企业职位（单表或者数字状态都可以）
     private String name;                //真实姓名
     private String contact;             //真实联系方式，生成虚拟号或后期进行转接
-    private Integer iid;//关联身份表
-    private Integer head;               //头像（头像是否是本人头像）1.是2.否
+    private Integer iid;                //关联身份表
+    private String  head;               //头像链接
     private Integer headState;          //头像审核状态（0,1,2）
     private String location;            //公司位置
     private Integer personIntegral;     //关联积分表  无表！
@@ -26,12 +26,46 @@ public class Merchant implements Serializable {
     private String nature;              //企业性质
     private String particular;          //企业用工详细需求类型
     private Integer member;             //会员状态(1.正常2.异常)
-    private Integer oid;//关联其他认证方式表
+    private Integer oid;                //关联其他认证方式表
     private Integer ranking;            //企业排名
     private Integer status;             //企业状态（是否违规操作，违规操作该企业纳入企业黑名单1.是2.否）
     private String credit;              //征信记录（通过富文本方式记录,不对外人进行展示)
     private Double balance;             //企业余额
-    private String identitys;       //默认商家
+    private String identitys;           //默认商家
+    private String registrationDate;     //注册时间
+
+    public Merchant() {
+    }
+
+    public Merchant(Integer id, String phone, String password, String enterpriseName, String nickName, Integer position, String name, String contact, Integer iid, String head, Integer headState, String location, Integer personIntegral, Integer personCurrency, Integer starLevel, String area, String nature, String particular, Integer member, Integer oid, Integer ranking, Integer status, String credit, Double balance, String identitys, String registrationDate) {
+        this.id = id;
+        this.phone = phone;
+        this.password = password;
+        this.enterpriseName = enterpriseName;
+        this.nickName = nickName;
+        this.position = position;
+        this.name = name;
+        this.contact = contact;
+        this.iid = iid;
+        this.head = head;
+        this.headState = headState;
+        this.location = location;
+        this.personIntegral = personIntegral;
+        this.personCurrency = personCurrency;
+        this.starLevel = starLevel;
+        this.area = area;
+        this.nature = nature;
+        this.particular = particular;
+        this.member = member;
+        this.oid = oid;
+        this.ranking = ranking;
+        this.status = status;
+        this.credit = credit;
+        this.balance = balance;
+        this.identitys = identitys;
+        this.registrationDate = registrationDate;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -104,11 +138,11 @@ public class Merchant implements Serializable {
         this.iid = iid;
     }
 
-    public Integer getHead() {
+    public String getHead() {
         return head;
     }
 
-    public void setHead(Integer head) {
+    public void setHead(String head) {
         this.head = head;
     }
 
@@ -232,38 +266,11 @@ public class Merchant implements Serializable {
         this.identitys = identitys;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", phone=").append(phone);
-        sb.append(", password=").append(password);
-        sb.append(", enterpriseName=").append(enterpriseName);
-        sb.append(", nickName=").append(nickName);
-        sb.append(", position=").append(position);
-        sb.append(", name=").append(name);
-        sb.append(", contact=").append(contact);
-        sb.append(", iid=").append(iid);
-        sb.append(", head=").append(head);
-        sb.append(", headState=").append(headState);
-        sb.append(", location=").append(location);
-        sb.append(", personIntegral=").append(personIntegral);
-        sb.append(", personCurrency=").append(personCurrency);
-        sb.append(", starLevel=").append(starLevel);
-        sb.append(", area=").append(area);
-        sb.append(", nature=").append(nature);
-        sb.append(", particular=").append(particular);
-        sb.append(", member=").append(member);
-        sb.append(", oid=").append(oid);
-        sb.append(", ranking=").append(ranking);
-        sb.append(", status=").append(status);
-        sb.append(", credit=").append(credit);
-        sb.append(", balance=").append(balance);
-        sb.append(", identitys=").append(identitys);
-        sb.append("]");
-        return sb.toString();
+    public String getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
     }
 }

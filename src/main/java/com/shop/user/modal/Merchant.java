@@ -1,6 +1,7 @@
 package com.shop.user.modal;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *商家表
@@ -32,12 +33,13 @@ public class Merchant implements Serializable {
     private String credit;              //征信记录（通过富文本方式记录,不对外人进行展示)
     private Double balance;             //企业余额
     private String identitys;           //默认商家
-    private String registrationDate;     //注册时间
+    private Date registrationdate;     //注册时间
+    private static final long serialVersionUID = 1L;
 
     public Merchant() {
     }
 
-    public Merchant(Integer id, String phone, String password, String enterpriseName, String nickName, Integer position, String name, String contact, Integer iid, String head, Integer headState, String location, Integer personIntegral, Integer personCurrency, Integer starLevel, String area, String nature, String particular, Integer member, Integer oid, Integer ranking, Integer status, String credit, Double balance, String identitys, String registrationDate) {
+    public Merchant(Integer id, String phone, String password, String enterpriseName, String nickName, Integer position, String name, String contact, Integer iid, String head, Integer headState, String location, Integer personIntegral, Integer personCurrency, Integer starLevel, String area, String nature, String particular, Integer member, Integer oid, Integer ranking, Integer status, String credit, Double balance, String identitys, Date registrationdate) {
         this.id = id;
         this.phone = phone;
         this.password = password;
@@ -63,7 +65,7 @@ public class Merchant implements Serializable {
         this.credit = credit;
         this.balance = balance;
         this.identitys = identitys;
-        this.registrationDate = registrationDate;
+        this.registrationdate = registrationdate;
     }
 
     public Integer getId() {
@@ -266,11 +268,47 @@ public class Merchant implements Serializable {
         this.identitys = identitys;
     }
 
-    public String getRegistrationDate() {
-        return registrationDate;
+    public Date getRegistrationdate() {
+        return registrationdate;
     }
 
-    public void setRegistrationDate(String registrationDate) {
-        this.registrationDate = registrationDate;
+    public void setRegistrationdate(Date registrationdate) {
+        this.registrationdate = registrationdate;
+    }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", phone=").append(phone);
+        sb.append(", password=").append(password);
+        sb.append(", enterpriseName=").append(enterpriseName);
+        sb.append(", nickName=").append(nickName);
+        sb.append(", position=").append(position);
+        sb.append(", name=").append(name);
+        sb.append(", contact=").append(contact);
+        sb.append(", iid=").append(iid);
+        sb.append(", head=").append(head);
+        sb.append(", headState=").append(headState);
+        sb.append(", location=").append(location);
+        sb.append(", personIntegral=").append(personIntegral);
+        sb.append(", personCurrency=").append(personCurrency);
+        sb.append(", starLevel=").append(starLevel);
+        sb.append(", area=").append(area);
+        sb.append(", nature=").append(nature);
+        sb.append(", particular=").append(particular);
+        sb.append(", member=").append(member);
+        sb.append(", oid=").append(oid);
+        sb.append(", ranking=").append(ranking);
+        sb.append(", status=").append(status);
+        sb.append(", credit=").append(credit);
+        sb.append(", balance=").append(balance);
+        sb.append(", identitys=").append(identitys);
+        sb.append(", registrationdate=").append(registrationdate);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

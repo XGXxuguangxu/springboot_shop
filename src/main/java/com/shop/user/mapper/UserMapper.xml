@@ -449,7 +449,7 @@
       credit = #{record.credit,jdbcType=VARCHAR},
       personMoney = #{record.personmoney,jdbcType=DOUBLE},
       identitys = #{record.identitys,jdbcType=VARCHAR},
-      registrationDate = #{record.registrationdate,jdbcType=TIMESTAMP}
+    registrationDate = #{record.registrationdate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -569,7 +569,7 @@
       credit = #{credit,jdbcType=VARCHAR},
       personMoney = #{personmoney,jdbcType=DOUBLE},
       identitys = #{identitys,jdbcType=VARCHAR},
-      registrationDate = #{registrationdate,jdbcType=TIMESTAMP}
+     registrationDate = #{registrationdate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

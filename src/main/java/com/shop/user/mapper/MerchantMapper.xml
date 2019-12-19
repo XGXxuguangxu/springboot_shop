@@ -11,7 +11,7 @@
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="contact" jdbcType="VARCHAR" property="contact" />
         <result column="iid" jdbcType="INTEGER" property="iid" />
-        <result column="head" jdbcType="INTEGER" property="head" />
+        <result column="head" jdbcType="VARCHAR" property="head" />
         <result column="headState" jdbcType="INTEGER" property="headState" />
         <result column="location" jdbcType="VARCHAR" property="location" />
         <result column="personIntegral" jdbcType="INTEGER" property="personIntegral" />
@@ -27,6 +27,7 @@
         <result column="credit" jdbcType="VARCHAR" property="credit" />
         <result column="balance" jdbcType="DOUBLE" property="balance" />
         <result column="identitys" jdbcType="VARCHAR" property="identitys" />
+        <result column="registrationDate" jdbcType="TIMESTAMP" property="registrationdate" />
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -89,7 +90,7 @@
     <sql id="Base_Column_List">
     id, phone, password, enterpriseName, nickName, `position`, `name`, contact, iid, head,
     headState, location, personIntegral, personCurrency, starLevel, area, nature, particular,
-    member, oid, ranking, status, credit, balance, identitys
+    member, oid, ranking, status, credit, balance, identitys, registrationDate
   </sql>
     <select id="selectByExample" parameterType="com.shop.user.modal.MerchantExample" resultMap="BaseResultMap">
         select
@@ -129,16 +130,16 @@
         nickName, `position`, `name`, contact, iid, head,
         headState, location, personIntegral, personCurrency,
         starLevel, area, nature, particular,
-        member, oid, ranking, status, credit, balance, identitys
+        member, oid, ranking, status, credit, balance, identitys, registrationDate
         )
         values (#{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR},
         #{nickName,jdbcType=VARCHAR}, #{position,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
-        #{contact,jdbcType=VARCHAR}, #{iid,jdbcType=INTEGER}, #{head,jdbcType=INTEGER},
+        #{contact,jdbcType=VARCHAR}, #{iid,jdbcType=INTEGER}, #{head,jdbcType=VARCHAR},
         #{headState,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, #{personIntegral,jdbcType=INTEGER},
         #{personCurrency,jdbcType=INTEGER}, #{starLevel,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR},
         #{nature,jdbcType=VARCHAR}, #{particular,jdbcType=VARCHAR}, #{member,jdbcType=INTEGER},
         #{oid,jdbcType=INTEGER}, #{ranking,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
-        #{credit,jdbcType=VARCHAR}, #{balance,jdbcType=DOUBLE}, #{identitys,jdbcType=VARCHAR}
+        #{credit,jdbcType=VARCHAR}, #{balance,jdbcType=DOUBLE}, #{identitys,jdbcType=VARCHAR}, #{registrationdate,jdbcType=TIMESTAMP}
         )
     </insert>
     <insert id="insertSelective" parameterType="com.shop.user.modal.Merchant">
@@ -219,6 +220,9 @@
             <if test="identitys != null">
                 identitys,
             </if>
+            <if test="registrationdate != null">
+                registrationDate,
+            </if>
 
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -247,7 +251,7 @@
                 #{iid,jdbcType=INTEGER},
             </if>
             <if test="head != null">
-                #{head,jdbcType=INTEGER},
+                #{head,jdbcType=VARCHAR},
             </if>
             <if test="headState != null">
                 #{headState,jdbcType=INTEGER},
@@ -294,6 +298,9 @@
             <if test="identitys != null">
                 #{identitys,jdbcType=VARCHAR},
             </if>
+            <if test="registrationdate != null">
+                #{registrationdate,jdbcType=TIMESTAMP},
+            </if>
         </trim>
     </insert>
     <select id="countByExample" parameterType="com.shop.user.modal.MerchantExample" resultType="java.lang.Integer">
@@ -333,7 +340,7 @@
                 iid = #{record.iid,jdbcType=INTEGER},
             </if>
             <if test="record.head != null">
-                head = #{record.head,jdbcType=INTEGER},
+                head = #{record.head,jdbcType=VARCHAR},
             </if>
             <if test="record.headState != null">
                 headState = #{record.headState,jdbcType=INTEGER},
@@ -380,6 +387,9 @@
             <if test="record.identitys != null">
                 identitys = #{record.identitys,jdbcType=VARCHAR},
             </if>
+            <if test="record.registrationdate != null">
+                registrationDate = #{record.registrationdate,jdbcType=TIMESTAMP},
+            </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -396,7 +406,7 @@
         `name` = #{record.name,jdbcType=VARCHAR},
         contact = #{record.contact,jdbcType=VARCHAR},
         iid = #{record.iid,jdbcType=INTEGER},
-        head = #{record.head,jdbcType=INTEGER},
+        head = #{record.head,jdbcType=VARCHAR},
         headState = #{record.headState,jdbcType=INTEGER},
         location = #{record.location,jdbcType=VARCHAR},
         personIntegral = #{record.personIntegral,jdbcType=INTEGER},
@@ -411,7 +421,8 @@
         status = #{record.status,jdbcType=INTEGER},
         credit = #{record.credit,jdbcType=VARCHAR},
         balance = #{record.balance,jdbcType=DOUBLE},
-        identitys = #{record.identitys,jdbcType=VARCHAR}
+        identitys = #{record.identitys,jdbcType=VARCHAR},
+        registrationDate = #{record.registrationdate,jdbcType=TIMESTAMP}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -444,7 +455,7 @@
                 iid = #{iid,jdbcType=INTEGER},
             </if>
             <if test="head != null">
-                head = #{head,jdbcType=INTEGER},
+                head = #{head,jdbcType=VARCHAR},
             </if>
             <if test="headState != null">
                 headState = #{headState,jdbcType=INTEGER},
@@ -491,6 +502,9 @@
             <if test="identitys != null">
                 identitys = #{identitys,jdbcType=VARCHAR},
             </if>
+            <if test="registrationdate != null">
+                registrationDate = #{registrationdate,jdbcType=TIMESTAMP},
+            </if>
 
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -505,7 +519,7 @@
       `name` = #{name,jdbcType=VARCHAR},
       contact = #{contact,jdbcType=VARCHAR},
       iid = #{iid,jdbcType=INTEGER},
-      head = #{head,jdbcType=INTEGER},
+      head = #{head,jdbcType=VARCHAR},
       headState = #{headState,jdbcType=INTEGER},
       location = #{location,jdbcType=VARCHAR},
       personIntegral = #{personIntegral,jdbcType=INTEGER},
@@ -520,7 +534,8 @@
       status = #{status,jdbcType=INTEGER},
       credit = #{credit,jdbcType=VARCHAR},
       balance = #{balance,jdbcType=DOUBLE},
-      identitys = #{identitys,jdbcType=VARCHAR}
+      identitys = #{identitys,jdbcType=VARCHAR},
+      registrationDate = #{registrationdate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 

@@ -1,6 +1,7 @@
 package com.shop.user.modal;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -718,62 +719,62 @@ public class MerchantExample {
             return (Criteria) this;
         }
 
-        public Criteria andHeadEqualTo(Integer value) {
+        public Criteria andHeadEqualTo(String value) {
             addCriterion("head =", value, "head");
             return (Criteria) this;
         }
 
-        public Criteria andHeadNotEqualTo(Integer value) {
+        public Criteria andHeadNotEqualTo(String value) {
             addCriterion("head <>", value, "head");
             return (Criteria) this;
         }
 
-        public Criteria andHeadGreaterThan(Integer value) {
+        public Criteria andHeadGreaterThan(String value) {
             addCriterion("head >", value, "head");
             return (Criteria) this;
         }
 
-        public Criteria andHeadGreaterThanOrEqualTo(Integer value) {
+        public Criteria andHeadGreaterThanOrEqualTo(String value) {
             addCriterion("head >=", value, "head");
             return (Criteria) this;
         }
 
-        public Criteria andHeadLessThan(Integer value) {
+        public Criteria andHeadLessThan(String value) {
             addCriterion("head <", value, "head");
             return (Criteria) this;
         }
 
-        public Criteria andHeadLessThanOrEqualTo(Integer value) {
+        public Criteria andHeadLessThanOrEqualTo(String value) {
             addCriterion("head <=", value, "head");
             return (Criteria) this;
         }
 
-        public Criteria andHeadLike(Integer value) {
+        public Criteria andHeadLike(String value) {
             addCriterion("head like", value, "head");
             return (Criteria) this;
         }
 
-        public Criteria andHeadNotLike(Integer value) {
+        public Criteria andHeadNotLike(String value) {
             addCriterion("head not like", value, "head");
             return (Criteria) this;
         }
 
-        public Criteria andHeadIn(List<Integer> values) {
+        public Criteria andHeadIn(List<String> values) {
             addCriterion("head in", values, "head");
             return (Criteria) this;
         }
 
-        public Criteria andHeadNotIn(List<Integer> values) {
+        public Criteria andHeadNotIn(List<String> values) {
             addCriterion("head not in", values, "head");
             return (Criteria) this;
         }
 
-        public Criteria andHeadBetween(Integer value1, Integer value2) {
+        public Criteria andHeadBetween(String value1, String value2) {
             addCriterion("head between", value1, value2, "head");
             return (Criteria) this;
         }
 
-        public Criteria andHeadNotBetween(Integer value1, Integer value2) {
+        public Criteria andHeadNotBetween(String value1, String value2) {
             addCriterion("head not between", value1, value2, "head");
             return (Criteria) this;
         }
@@ -1715,6 +1716,65 @@ public class MerchantExample {
 
         public Criteria andIdentitysNotBetween(String value1, String value2) {
             addCriterion("identitys not between", value1, value2, "identitys");
+            return (Criteria) this;
+        }
+        public Criteria andRegistrationdateIsNull() {
+            addCriterion("registrationDate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationdateIsNotNull() {
+            addCriterion("registrationDate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationdateEqualTo(Date value) {
+            addCriterion("registrationDate =", value, "registrationdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationdateNotEqualTo(Date value) {
+            addCriterion("registrationDate <>", value, "registrationdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationdateGreaterThan(Date value) {
+            addCriterion("registrationDate >", value, "registrationdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationdateGreaterThanOrEqualTo(Date value) {
+            addCriterion("registrationDate >=", value, "registrationdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationdateLessThan(Date value) {
+            addCriterion("registrationDate <", value, "registrationdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationdateLessThanOrEqualTo(Date value) {
+            addCriterion("registrationDate <=", value, "registrationdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationdateIn(List<Date> values) {
+            addCriterion("registrationDate in", values, "registrationdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationdateNotIn(List<Date> values) {
+            addCriterion("registrationDate not in", values, "registrationdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationdateBetween(Date value1, Date value2) {
+            addCriterion("registrationDate between", value1, value2, "registrationdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationdateNotBetween(Date value1, Date value2) {
+            addCriterion("registrationDate not between", value1, value2, "registrationdate");
             return (Criteria) this;
         }
 
